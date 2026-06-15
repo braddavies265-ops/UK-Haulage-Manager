@@ -52,6 +52,7 @@ margin-top:0;
 <h2>Player</h2>
 <p id="money">Savings: £5000</p>
 <p id="day">Day: 1</p>
+<p id="fatigue">Fatigue: 0%</p>
 </div>
 
 <div class="card">
@@ -63,6 +64,10 @@ Tesco RDC Shift (£180)
 
 <button onclick="workContainer()">
 Container Shift (£220)
+</button>
+
+<button onclick="restDay()">
+Rest Day
 </button>
 
 </div>
@@ -80,27 +85,60 @@ Save £25,000 to buy your first truck.
 
 let money = 5000;
 let day = 1;
+let fatigue = 0;
+let companyOwned = false;
 
 function update(){
 document.getElementById("money").innerHTML =
 "Savings: £" + money;
+document.getElementById("fatigue").innerHTML =
+"Fatigue: " + fatigue + "%";
 
 document.getElementById("day").innerHTML =
 "Day: " + day;
 }
 
 function workShift(){
+
+if(fatigue >= 100){
+alert("You are too tired. Take a rest day.");
+return;
+}
+
 money += 180;
 day += 1;
+fatigue += 10;
+
 update();
 }
 
 function workContainer(){
+
+if(fatigue >= 100){
+alert("You are too tired. Take a rest day.");
+return;
+}
+
 money += 220;
 day += 1;
+fatigue += 15;
+
 update();
 }
 
+function restDay(){
+
+fatigue -= 40;
+
+if(fatigue < 0){
+  fatigue = 0;
+}
+
+day += 1;
+
+update();
+}
+  
 update();
 
 </script>
