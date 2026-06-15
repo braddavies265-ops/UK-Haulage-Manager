@@ -53,6 +53,7 @@ margin-top:0;
 <p id="money">Savings: £5000</p>
 <p id="day">Day: 1</p>
 <p id="fatigue">Fatigue: 0%</p>
+<p id="company">No Company</p>
 </div>
 
 <div class="card">
@@ -69,6 +70,10 @@ Container Shift (£220)
 <button onclick="restDay()">
 Rest Day
 </button>
+
+<button onclick="startCompany()">
+Start Ltd Company (£1000)
+</button>  
 
 </div>
 
@@ -138,6 +143,47 @@ day += 1;
 
 update();
 }
+
+if(companyOwned){
+document.getElementById("company").innerHTML =
+"Company: Brad Davies Haulage Ltd";
+}else{
+document.getElementById("company").innerHTML =
+"Company: Not Started";
+}  
+
+function startCompany(){
+
+if(companyOwned){
+alert("You already own a company.");
+return;
+}
+
+if(money < 25000){
+alert("You need £25,000 savings first.");
+return;
+}
+
+
+money -= 1000;
+
+companyOwned = true;
+
+alert("Brad Davies Haulage Ltd has been formed.");
+
+update();
+
+}
+
+money -= 1000;
+
+companyOwned = true;
+
+alert("Brad Davies Haulage Ltd has been formed.");
+
+update();
+
+}  
   
 update();
 
