@@ -98,10 +98,16 @@ document.getElementById("money").innerHTML =
 "Savings: £" + money;
 document.getElementById("fatigue").innerHTML =
 "Fatigue: " + fatigue + "%";
-
 document.getElementById("day").innerHTML =
 "Day: " + day;
-}
+if(companyOwned){
+document.getElementById("company").innerHTML =
+"Company: Brad Davies Haulage Ltd";
+}else{
+document.getElementById("company").innerHTML =
+"Company: Not Started";
+}  
+
 
 function workShift(){
 
@@ -144,13 +150,7 @@ day += 1;
 update();
 }
 
-if(companyOwned){
-document.getElementById("company").innerHTML =
-"Company: Brad Davies Haulage Ltd";
-}else{
-document.getElementById("company").innerHTML =
-"Company: Not Started";
-}  
+
 
 function startCompany(){
 
