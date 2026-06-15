@@ -102,6 +102,22 @@ Buy DAF XF 480 (£112,000)
 </button>
 
 </div>
+<div class="card">
+<h2>Haulage Contracts</h2>
+
+<button onclick="haulageJob(650)">
+Pallet Delivery (£650)
+</button>
+
+<button onclick="haulageJob(850)">
+RDC Trunk (£850)
+</button>
+
+<button onclick="haulageJob(900)">
+Container Work (£900)
+</button>
+
+</div>
 <script>
 
 let money = 5000;
@@ -109,6 +125,7 @@ let day = 1;
 let fatigue = 0;
 let companyOwned = false;
 let truckOwned = "None";
+let ownerOperator = false;
 
 function update(){
 document.getElementById("money").innerHTML =
@@ -204,8 +221,22 @@ function buyTruck(name, price){
 
   money -= price;
   truckOwned = name;
+  ownerOperator = true;
 
   alert("You bought a " + name);
+
+  update();
+}
+function haulageJob(pay){
+
+  if(!ownerOperator){
+    alert("You need your own truck first.");
+    return;
+  }
+
+  money += pay;
+  day += 1;
+  fatigue += 20;
 
   update();
 }
