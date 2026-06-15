@@ -54,6 +54,7 @@ margin-top:0;
 <p id="day">Day: 1</p>
 <p id="fatigue">Fatigue: 0%</p>
 <p id="company">No Company</p>
+<p id="truck">Truck: None</p>
 </div>
 
 <div class="card">
@@ -85,13 +86,29 @@ Save £25,000 to buy your first truck.
 </p>
 
 </div>
+<div class="card">
+<h2>Truck Dealer</h2>
 
+<button onclick="buyTruck('Scania R460',115000)">
+Buy Scania R460 (£115,000)
+</button>
+
+<button onclick="buyTruck('Volvo FH460',118000)">
+Buy Volvo FH460 (£118,000)
+</button>
+
+<button onclick="buyTruck('DAF XF 480',112000)">
+Buy DAF XF 480 (£112,000)
+</button>
+
+</div>
 <script>
 
 let money = 5000;
 let day = 1;
 let fatigue = 0;
 let companyOwned = false;
+let truckOwned = "None";
 
 function update(){
 document.getElementById("money").innerHTML =
@@ -107,6 +124,8 @@ document.getElementById("company").innerHTML =
 document.getElementById("company").innerHTML =
 "Company: Not Started";
 }  
+document.getElementById("truck").innerHTML =
+"Truck: " + truckOwned;  
 
 }
 function workShift(){
@@ -175,7 +194,22 @@ update();
 
 }
 
+let truckOwned = "None";
 
+function buyTruck(name, price){
+
+  if(money < price){
+    alert("Not enough money.");
+    return;
+  }
+
+  money -= price;
+  truckOwned = name;
+
+  alert("You bought a " + name);
+
+  update();
+}
   
 update();
 
