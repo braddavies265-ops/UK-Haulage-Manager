@@ -7,6 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <title>UK Haulage Manager</title>
 
+  
 <style>
 body{
 font-family:Arial;
@@ -55,6 +56,7 @@ margin-top:0;
 <p id="fatigue">Fatigue: 0%</p>
 <p id="company">No Company</p>
 <p id="truck">Truck: None</p>
+<p id="career">Career: Agency Driver</p>  
 </div>
 
 <div class="card">
@@ -87,6 +89,10 @@ Save £25,000 to buy your first truck.
 
 </div>
 <div class="card">
+<h2>Haulage Contracts</h2>
+</div>
+  
+<div class="card">
 <h2>Truck Dealer</h2>
 
 <button onclick="buyTruck('Scania R460',115000)">
@@ -101,9 +107,7 @@ Buy Volvo FH460 (£118,000)
 Buy DAF XF 480 (£112,000)
 </button>
 
-</div>
-<div class="card">
-<h2>Haulage Contracts</h2>
+
 
 <button onclick="haulageJob(650)">
 Pallet Delivery (£650)
@@ -126,6 +130,7 @@ let fatigue = 0;
 let companyOwned = false;
 let truckOwned = "None";
 let ownerOperator = false;
+let year = 1;
 
 function update(){
 document.getElementById("money").innerHTML =
@@ -143,7 +148,14 @@ document.getElementById("company").innerHTML =
 }  
 document.getElementById("truck").innerHTML =
 "Truck: " + truckOwned;  
-
+if(ownerOperator){
+  document.getElementById("career").innerHTML =
+  "Career: Owner Operator";
+}else{
+  document.getElementById("career").innerHTML =
+  "Career: Agency Driver";
+}
+  
 }
 function workShift(){
 
@@ -152,8 +164,12 @@ alert("You are too tired. Take a rest day.");
 return;
 }
 
-money += 180;
+money += 140;
 day += 1;
+if(day > 365){
+  year += 1;
+  day = 1;
+}
 fatigue += 10;
 
 update();
@@ -166,8 +182,12 @@ alert("You are too tired. Take a rest day.");
 return;
 }
 
-money += 220;
+money += 170;
 day += 1;
+if(day > 365){
+  year += 1;
+  day = 1;
+}
 fatigue += 15;
 
 update();
@@ -182,6 +202,10 @@ if(fatigue < 0){
 }
 
 day += 1;
+if(day > 365){
+  year += 1;
+  day = 1;
+}
 
 update();
 }
@@ -236,6 +260,10 @@ function haulageJob(pay){
 
   money += pay;
   day += 1;
+  if(day > 365){
+  year += 1;
+  day = 1;
+}
   fatigue += 20;
 
   update();
