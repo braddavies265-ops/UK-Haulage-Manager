@@ -131,6 +131,8 @@ let companyOwned = false;
 let truckOwned = "None";
 let ownerOperator = false;
 let year = 1;
+let taxIncome = 0;
+let nextTaxDay = 30;
 
 function update(){
 document.getElementById("money").innerHTML =
@@ -165,6 +167,7 @@ return;
 }
 
 money += 140;
+taxIncome += 140;
 day += 1;
 if(day > 365){
   year += 1;
@@ -183,6 +186,7 @@ return;
 }
 
 money += 170;
+taxIncome += 170;
 day += 1;
 if(day > 365){
   year += 1;
@@ -267,6 +271,28 @@ function haulageJob(pay){
   fatigue += 20;
 
   update();
+}
+if(day >= nextTaxDay){
+
+    let tax = 0;
+
+    if(taxIncome <= 4500){
+        tax = taxIncome * 0.20;
+    }else{
+        tax = (4500 * 0.20) +
+              ((taxIncome - 4500) * 0.40);
+    }
+
+    money -= tax;
+
+    alert(
+        "HMRC Tax Bill\n\n" +
+        "Income: £" + taxIncome +
+        "\nTax: £" + tax.toFixed(0)
+    );
+
+    taxIncome = 0;
+    nextTaxDay += 30;
 }
   
 update();
