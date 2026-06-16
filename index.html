@@ -125,16 +125,16 @@ Buy Fridge (£25,000)
 
 </div>
 
-<button onclick="haulageJob(650)">
-Pallet Delivery (£650)
+<button onclick="haulageJob('pallet')">
+Pallet Delivery (£500)
 </button>
 
-<button onclick="haulageJob(850)">
-RDC Trunk (£850)
+<button onclick="haulageJob('rdc')">
+RDC Trunk (£650)
 </button>
 
-<button onclick="haulageJob(900)">
-Container Work (£900)
+<button onclick="haulageJob('container')">
+Container Work (£700)
 </button>
 
 </div>
@@ -275,14 +275,40 @@ function buyTruck(name, price){
 
   update();
 }
-function haulageJob(pay){
+function haulageJob(job){
 
   if(!ownerOperator){
     alert("You need your own truck first.");
     return;
   }
 
-  money += pay;
+  let pay = 0;
+
+if(job == "pallet"){
+    pay = 500;
+
+    if(trailerOwned == "Curtainsider"){
+        pay = 650;
+    }
+}
+
+if(job == "rdc"){
+    pay = 650;
+
+    if(trailerOwned == "Fridge"){
+        pay = 850;
+    }
+}
+
+if(job == "container"){
+    pay = 700;
+
+    if(trailerOwned == "Skeletal"){
+        pay = 900;
+    }
+}
+
+money += pay;
   day += 1;
   if(day > 365){
   year += 1;
